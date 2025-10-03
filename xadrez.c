@@ -1,44 +1,49 @@
 #include <stdio.h>
 
+// Torre com recursividade
+void moverTorre(int casas, int atual) {
+    if (atual > casas) return;
+    printf("Torre moveu %d casa(s)\n", atual);
+    moverTorre(casas, atual + 1);
+}
+
+// Bispo com recursividade
+void moverBispo(int casas, int atual) {
+    if (atual > casas) return;
+    printf("Bispo moveu %d casa(s) na diagonal\n", atual);
+    moverBispo(casas, atual + 1);
+}
+
+// Rainha com recursividade
+void moverRainha(int casas, int atual) {
+    if (atual > casas) return;
+    printf("Rainha moveu %d casa(s)\n", atual);
+    moverRainha(casas, atual + 1);
+}
+
+// Cavalo com loops aninhados
+void moverCavalo(int max) {
+    for (int i = 1; i <= max; i++) {
+        for (int j = 1; j <= max; j++) {
+            if (i == j) continue;  // só pra mostrar o uso do continue
+            if (i + j > max + 1) break;  // exemplo de break
+            printf("Cavalo moveu em L: (%d, %d)\n", i, j);
+        }
+    }
+}
+
 int main() {
-    
-    int casasTorre = 5;
-    int casasBispo = 5;
-    int casasRainha = 8;
+    printf("\n--- Torre ---\n");
+    moverTorre(5, 1);
 
-    
-    printf("Movimento da Torre (5 casas para a direita):\n");
-    for (int i = 1; i <= casasTorre; i++) {
-        printf("Torre moveu para a direita %d casa(s)\n", i);
-    }
+    printf("\n--- Bispo ---\n");
+    moverBispo(5, 1);
 
-    
-    printf("\nMovimento do Bispo (5 casas na diagonal cima-direita):\n");
-    int i = 1;
-    while (i <= casasBispo) {
-        printf("Bispo moveu para cima e para a direita (%d,%d)\n", i, i);
-        i++;
-    }
+    printf("\n--- Rainha ---\n");
+    moverRainha(8, 1);
 
-
-    printf("\nMovimento da Rainha (8 casas para a esquerda):\n");
-    int j = 1;
-    do {
-        printf("Rainha moveu para a esquerda %d casa(s)\n", j);
-        j++;
-    } while (j <= casasRainha);
-
-    
-    printf("\nMovimento do Cavalo (em L):\n");
-    
-    int movimentos[8][2] = {
-        {2, 1}, {1, 2}, {-1, 2}, {-2, 1},
-        {-2, -1}, {-1, -2}, {1, -2}, {2, -1}
-    };
-
-    for (int k = 0; k < 8; k++) {
-        printf("Cavalo moveu para (%d, %d)\n", movimentos[k][0], movimentos[k][1]);
-    }
+    printf("\n--- Cavalo ---\n");
+    moverCavalo(3);
 
     return 0;
 }
